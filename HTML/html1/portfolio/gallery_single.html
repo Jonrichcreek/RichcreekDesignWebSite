@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% block title %} | {{portfolio_sig.title}} {% endblock %}
+{% block content %}
+
+<section class="page_title ds s-pt-100 s-pb-50 s-pt-md-75 s-pb-md-25 breadcrumbs">
+        <div class="container">
+            <div class="row">
+
+                <div class="d-none d-lg-block divider-90"></div>
+
+                <div class="col-md-12 text-center">
+                    <h1>{{portfolio_sig.title}}</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="./">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">Pages</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Gallery Single 1
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="d-none d-lg-block divider-15"></div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="ds s-py-75 s-py-lg-50">
+        <div class="container">
+            <div class="row">
+
+                <div class="d-none d-lg-block divider-70"></div>
+
+                <div class="col-lg-10 offset-lg-1">
+
+                    <div class="vertical-item content-padding hero-bg text-center">
+                        <div class="item-media">
+                            <div class="owl-carousel" data-margin="0" data-responsive-lg="1" data-responsive-md="1" data-responsive-sm="1" data-responsive-xs="1" data-dots="true">
+
+                                <a href="{{portfolio_sig.pic_main.url}}" class="photoswipe-link" data-width="1170" data-height="780">
+                                    <img src="{{portfolio_sig.pic_main.url}}" alt="">
+                                </a>
+                                {% if portfolio_sig.pic_1 %}
+                                <a href="{{portfolio_sig.pic_1.url}}" class="photoswipe-link" data-width="1170" data-height="780" data-iframe="https://www.youtube.com/embed/mcixldqDIEQ">
+                                    <img src="{{portfolio_sig.pic_1.url}}" alt="">
+                                </a>
+                                {% endif %}
+                                {% if portfolio_sig.pic_2 %}
+                                <a href="{{portfolio_sig.pic_2.url}}" class="photoswipe-link" data-width="1170" data-height="780" data-iframe="//player.vimeo.com/video/1084537">
+                                    <img src="{{portfolio_sig.pic_2.url}}" alt="">
+                                </a>
+                                {% endif %}
+                                {% if portfolio_sig.pic_3 %}
+                                <a href="{{portfolio_sig.pic_3.url}}" class="photoswipe-link" data-width="1170" data-height="780">
+                                    <img src="{{portfolio_sig.pic_3.url}}" alt="">
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <h3>
+                                {{portfolio_sig.title}}
+                            </h3>
+                            <p>
+                               {{portfolio_sig.descrption}}
+                            </p>
+                            <div class="social-icons">
+                                <a href="#" class="fa fa-facebook " title="facebook"></a>
+                                <a href="#" class="fa fa-twitter " title="twitter"></a>
+                                <a href="#" class="fa fa-instagram " title="instagram"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="d-none d-lg-block divider-70"></div>
+            </div>
+
+        </div>
+    </section>
+
+
+    {% endblock %}

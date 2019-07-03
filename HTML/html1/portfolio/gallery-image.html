@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% block title %} | Gallery of Our Projects {% endblock %}
+{% block content %}
+
+
+<section class="page_title ds s-pt-100 s-pb-50 s-pt-md-75 s-pb-md-25 breadcrumbs">
+        <div class="container">
+            <div class="row">
+
+                <div class="d-none d-lg-block divider-90"></div>
+
+                <div class="col-md-12 text-center">
+                    <h1>Gallery Regular</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="./">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">Pages</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Gallery Regular
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="d-none d-lg-block divider-15"></div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="ds s-pt-60 s-pb-75 s-pb-md-100 s-pb-lg-75 s-py-lg-50">
+        <div class="container">
+            <div class="row">
+
+                <div class="d-none d-lg-block divider-25"></div>
+
+                <div class="col-lg-12">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 col-xl-7">
+                            <div class="filters gallery-filters small-text text-lg-right">
+                                <a href="#" data-filter="*" class="active selected">All</a>
+                                {% if portfolio %}
+                                    {% for item in portfolio %}
+                                    <a href="#" data-filter=".decorative">{{ item.category }}</a>
+                                    {% endfor %}
+                                {% else %}
+                                <div class="col-md-12">
+                                    <p>No Listings Available</p>
+                                </div>
+                                {% endif %}
+                               
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row isotope-wrapper masonry-layout c-mb-30" data-filters=".gallery-filters">
+
+                        {% if portfolio %}
+                            {% for item in portfolio %}
+                            <div class="col-xl-4 col-md-6 col-12 facades ">
+
+                                <div class="vertical-item item-gallery content-absolute text-center ds">
+                                    <div class="item-media">
+                                        <img src="{{ item.pic_main.url }}" alt="">
+                                        <div class="media-links">
+                                            <div class="links-wrap">
+                                                <a class="link-zoom photoswipe-link" title="" href="{{ item.pic_main.url }}"></a>
+                                                <a class="link-anchor" title="" href="gallery_single.html"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-content gradientdarken-background">
+                                        <h4>
+                                            <a href="{% url 'gallery_single' item.id %}">{{item.title}}</a>
+                                        </h4>
+                                    </div>
+                                </div>
+                             </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="col-md-12">
+                                <p>No Listings Available</p>
+                            </div>
+                        {% endif %}
+
+                       
+
+                    </div>
+                    <!-- .isotope-wrapper-->
+
+                    <div class="row">
+                            <div class="col-sm-12 text-center">
+                                {% if portfolio.has_other_pages %}
+                                        <nav class="navigation pagination gallery" role="navigation">
+                                            <h2 class="screen-reader-text">Posts navigation</h2>
+                                            <div class="nav-links">
+                                                {% if portfolio.has_previous %}
+                                                <a class="prev page-numbers" href="?page={{portfolio.previous_page_number}}">
+                                                    <i class="fa fa-chevron-left"></i>
+                                                    <span class="screen-reader-text">Previous page</span>
+                                                </a>
+                                                {% else %}
+                                                    <a class="page-item disabled" >
+                                                        <i class="fa fa-chevron-left"></i>
+                                                        <span class="screen-reader-text">Previous page</span>
+                                                    </a>
+                                                {% endif %}
+                
+                                                {% for i in portfolio.paginator.page_range %}
+                                                    {% if portfolio.number == i %}
+                                                         <a class="page-numbers current" >
+                                                            <span class="meta-nav screen-reader-text">Page </span>
+                                                            {{i}}
+                                                        </a>
+                
+                                                    {% else %}
+                                                         <a class="page-numbers" href="?page={{i}}">
+                                                            <span class="meta-nav screen-reader-text">Page </span>
+                                                            {{i}}
+                                                        </a>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% if portfolio.has_next %}
+                                                <a class="next page-numbers" href="?page={{portfolio.next_page_number}}">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                    <span class="screen-reader-text">next page</span>
+                                                </a>
+                                            {% else %}
+                                                    <a class="page-item disabled" >
+                                                        <i class="fa fa-chevron-right"></i>
+                                                        <span class="screen-reader-text">next page</span>
+                                                    </a>
+                                            {% endif %}
+                                                
+                                            </div>
+                                        </nav>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                </div>
+
+                <div class="d-none d-lg-block divider-70"></div>
+            </div>
+
+        </div>
+    </section>
+
+    {% endblock %}

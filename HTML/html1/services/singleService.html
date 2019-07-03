@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% block title %} | {{service.title}} {% endblock %}
+{% block content %}
+
+<section class="page_title ds s-pt-100 s-pb-50 s-pt-md-75 s-pb-md-25 breadcrumbs">
+        <div class="container">
+            <div class="row">
+
+                <div class="d-none d-lg-block divider-90"></div>
+
+                <div class="col-md-12 text-center">
+                    <h1>{{service.title}}</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="./">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">Pages</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Single Service
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="d-none d-lg-block divider-15"></div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="ds s-py-50 c-gutter-60 single-service">
+        <div class="container">
+            <div class="row">
+
+                <div class="d-none d-lg-block divider-70"></div>
+
+
+                <div class="col-lg-6 animate" data-animation="fadeInLeft">
+                        <div class="item-media">
+                                <div class="owl-carousel" data-margin="0" data-responsive-lg="1" data-responsive-md="1" data-responsive-sm="1" data-responsive-xs="1" data-dots="true">
+                                    <a href="{{service.pic_main.url}}" class="photoswipe-link" data-width="1170" data-height="780">
+                                        <img src="{{service.pic_main.url}}" alt="">
+                                    </a>
+                                    <a href="{{service.pic_1.url}}" class="photoswipe-link" data-width="1170" data-height="780" >
+                                        <img src="{{service.pic_1.url}}" alt="">
+                                    </a>
+                                    <a href="{{service.pic_2.url}}" class="photoswipe-link" data-width="1170" data-height="780" >
+                                        <img src="{{service.pic_2.url}}" alt="">
+                                    </a>
+                                    <a href="{{service.pic_3.url}}" class="photoswipe-link" data-width="1170" data-height="780">
+                                        <img src="{{service.pic_3.url}}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                </div>
+                <!-- .col-* -->
+                <div class="col-lg-6 animate" data-animation="fadeInRight">
+                    <div class="item-content">
+                        <h3>{{service.title}}</h3>
+                        <p>
+                           {{service.blurb}}
+                        </p>
+                        <ul class="list-styled">
+                            <li>
+                                Ground round leberkas beef pork
+                            </li>
+                            <li>
+                                Belly drumstick tongue flank spare
+                            </li>
+                            <li>
+                                Ribs ham porchetta meat rump
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 animate" data-animation="fadeInUp">
+                    <p class="after-content">
+                       {{service.description}}
+                    </p>
+                </div>
+                <div class="d-none d-lg-block divider-70"></div>
+            </div>
+        </div>
+        <section class="ds s-pt-60 s-pb-50 s-py-lg-100 contact-form main-from s-parallax" id="contacts">
+				<div class="container">
+					<div class="row">
+						<div class="d-none d-lg-block divider-5"></div>
+						<div class="col-12 text-center">
+							<h2 class="header-section">Free Quote</h2>
+						</div>
+					</div>
+					<form class="contact-form c-mb-10 c-mb-md-30 c-gutter-30" method="post" action="{% url 'contact' %}">
+						{% csrf_token %}
+						{% if user.is_authenticated %}
+							<input type="hidden" name = "user_id" value="{{ user.id }}">
+						{% else %}
+							
+							<input type="hidden" name = "user_id" value="0">
+						{% endif %}
+                        <input type="hidden" name="alert_emal" value="jon.richcreek@gmail.com">
+                        <input type="hidden" name="service_id" value="{{service.id}}">
+                        <input type="hidden" name="service" value="{{service.title}}">
+
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group has-placeholder">
+									<label for="name">Full Name
+										<span class="required">*</span>
+									</label>
+									<input type="text" aria-required="true" size="30"  name="name" id="name" class="form-control text-center" placeholder="Full Name"
+									{% if user.is_authenticated %} value="{{user.first_name}} {{user.last_name}}" {% endif %} required>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group has-placeholder">
+									<label for="email">Email address
+										<span class="required">*</span>
+									</label>
+									<input type="email" aria-required="true" size="30"  name="email" id="email" class="form-control text-center" placeholder="Email Address" 
+									{% if user.is_authenticated %} value="{{user.email}}" {% endif %} required>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group has-placeholder">
+									<label for="phone">Phone
+										<span class="required">*</span>
+									</label>
+									<input type="text" aria-required="true" size="30" value="" name="phone" id="phone" class="form-control text-center" placeholder="Phone Number">
+								</div>
+							</div>
+							<div class="col-sm-12">
+
+								<div class="form-group has-placeholder">
+									<label for="message">Message</label>
+									<textarea aria-required="true" rows="6" cols="45" name="message" id="message" class="form-control text-center" placeholder="Message"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row c-mt-20 c-mt-md-0">
+							<div class="col-sm-12">
+								<div class="form-group text-center">
+									<button type="submit" id="contact_form_submit" name="contact_submit" class="btn btn-outline-maincolor">Send Now</button>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="divider-15"></div>
+				</div>
+			</section>
+    </section>
+
+    {% endblock %}
